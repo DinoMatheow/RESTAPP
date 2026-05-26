@@ -1,3 +1,5 @@
+import { envs } from "./config/envs.js";
+import { Server } from "./presentation/server.js";
 
 
 (()=>{
@@ -7,5 +9,14 @@
 
 function main(){
 
-    console.log("Hello world!");
+
+
+    
+    const server = new Server({
+        port: envs.PORT,
+        public_path: envs. PUBLIC_PATH,
+    });
+
+    server.start(); 
+
 }
