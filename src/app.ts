@@ -1,52 +1,22 @@
-import http from 'http';
-import fs from 'fs';
-import http2 from 'http2';
+import { envs } from "./config/envs.js";
+import { Server } from "./presentation/server.js";
 
 
-const server = http2.createSecureServer({
-    key: fs.readFileSync("./keys/server.key"),
-    cert: fs.readFileSync("./keys/server.crt"),
-}, (req, res) => {
-    console.log(req.url);
+(()=>{
+    main();
+})();
 
-    // res.writeHead(200, {'Content-Type': 'text/html'});
-    // res.write( `URL  ${req.url}) `);
-    // res.end();
-    // const data = {
-    //     name: 'John Doe',
-    //     age: 30,
-    //     city: 'New York',
-    // };
 
-    // res.writeHead(200, {'Content-Type': 'application/json'});
-    // res.end(JSON.stringify(data));
-    if( req.url === '/'){
-        const htmlFile = fs.readFileSync("./public/index.html", "utf8");
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.end(htmlFile);
-
-        return;
-    } 
+function main(){
 
 
 
-    if (req.url?.endsWith(".js")){
-        res.writeHead(200, {'Content-Type': 'application/javascript'});
+    
+    const server = new Server({
+        port: envs.PORT,
+        public_path: envs. PUBLIC_PATH,
+    });
 
-    }else if(req.url?.endsWith(".css")){
-        res.writeHead(200, {'Content-Type': 'text/css'});
-    }
+    server.start(); 
 
-    const responseContent = fs.readFileSync(`./public${req.url}`, "utf8");
-    res.end(responseContent);
-
-
-
-
-
-
-});
-
-server.listen(8080, ()=>{
-    console.log('Server is running on port 8080');
-});
+}
