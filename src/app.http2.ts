@@ -33,7 +33,7 @@ const server = http2.createSecureServer({
 
     }else if(req.url?.endsWith(".css")){
         res.writeHead(200, {'Content-Type': 'text/css'});
-    }
+    }   
 
     try {
         
