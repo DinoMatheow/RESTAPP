@@ -33,6 +33,11 @@ export class Server {
 
 
     async start() {
+        //Middlewares
+        this.app.use(express.json());
+        this.app.use(express.urlencoded({extended: true}));
+        
+
         // public 
         this.app.use( express.static( this.publicPath ) );
 
