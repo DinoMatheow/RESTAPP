@@ -1,5 +1,5 @@
-import { Router } from "express";
 import { TodosController } from "./controller.js";
+import { Router } from "express";
 
 export class TodoRoutes{
     
