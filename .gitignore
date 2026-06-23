@@ -7,3 +7,5 @@ keys/
 dist/
 postgres/
 /src/generated/prisma
+
+migrations/
