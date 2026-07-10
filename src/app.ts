@@ -3,7 +3,7 @@ import { AppRoutes } from "./presentation/routes.js";
 import { Server } from "./presentation/server.js";
 
 
-(()=>{
+(async()=>{
     main();
 })();
 

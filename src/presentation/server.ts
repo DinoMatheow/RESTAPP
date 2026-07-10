@@ -1,6 +1,5 @@
 import express, { Router } from 'express'
 import path from 'path';
-import { fileURLToPath } from 'url';
 
 interface Options{
     port: number;
@@ -8,9 +7,7 @@ interface Options{
     routes: Router;
 }
 
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const appRoot = process.cwd();
 
 
 export class Server {
@@ -51,7 +48,7 @@ export class Server {
 
         // spa 
         this.app.get('/{*path}', (req, res)=> {
-            const indexPath = path.join(__dirname + `../../../${this.publicPath}/index.html`);
+            const indexPath = path.resolve(appRoot, this.publicPath, 'index.html');
             // console.log(req.url);
             res.sendFile(indexPath);
 
