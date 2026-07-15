@@ -10,8 +10,8 @@ export class TodoRoutes{
         const router = Router();
         const datasource = new TodoDatasourceImple();
         const todoRepository = new TodoRepositoryImple( datasource );
-
         const todosController = new TodosController(todoRepository);
+
         router.get("/", todosController.getTodos);
         router.get("/:id", todosController.getTodoById);
         router.post("/", todosController.createTodo);

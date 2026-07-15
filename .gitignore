@@ -9,3 +9,4 @@ postgres/
 /src/generated/prisma
 
 migrations/
+coverage/

@@ -1,4 +1,4 @@
-import express, { Router } from 'express'
+import express, { Router, type Application } from 'express'
 import path from 'path';
 
 interface Options{
@@ -7,12 +7,11 @@ interface Options{
     routes: Router;
 }
 
-const appRoot = process.cwd();
-
+ 
 
 export class Server {
 
-    private app = express();
+    public readonly app:Application = express();
     private readonly port: number;
     private readonly publicPath: string;
     private readonly routes: Router;
@@ -23,7 +22,7 @@ export class Server {
 
         this.port = port;
         this.publicPath = public_path;
-        this.routes = options.routes;
+        this.routes = routes;
     }
 
 
@@ -33,6 +32,7 @@ export class Server {
         //Middlewares
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: true}));
+        // this.app.use( compression() )
         
 
         // public 
@@ -48,7 +48,7 @@ export class Server {
 
         // spa 
         this.app.get('/{*path}', (req, res)=> {
-            const indexPath = path.resolve(appRoot, this.publicPath, 'index.html');
+            const indexPath = path.join(__dirname, this.publicPath, 'index.html');
             // console.log(req.url);
             res.sendFile(indexPath);
 
