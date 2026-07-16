@@ -4,36 +4,36 @@ export class UpdateTodoDto {
     private constructor(
         public readonly id: number,
         public readonly text?: string,
-        public readonly completed?: Date,
+        public readonly completedAt?: Date,
     ){}
 
     get values(){
         const  returnObj: {[key:string]:any} = {};
 
         if ( this.text ) returnObj.text = this.text;
-        if ( this.completed ) returnObj.completed = this.completed;
+        if ( this.completedAt ) returnObj.completedAt = this.completedAt;
 
         return returnObj;
 
     }
 
     static create(props:{[key:string]: any}) : [string | undefined, UpdateTodoDto | undefined] {
-        const {id,  text, completed  } = props;
-        let newComleted =  completed;
+        const {id,  text, completedAt  } = props;
+        let newCompletedAt =  completedAt;
 
         if(!id || isNaN (Number(id))){
             return ['id must be a valid number', undefined]
         }
 
-        if ( completed ) {
-            const newCompleted = new Date( completed )
-            if( newCompleted.toString() === 'Invalid Date' ) {
-                return ['Completed must be a valid date', undefined]
+        if ( completedAt ) {
+            const newCompletedAt = new Date( completedAt )
+            if( newCompletedAt.toString() === 'Invalid Date' ) {
+                return ['CompletedAt must be a valid date', undefined]
             }
         }
         
         
         
-        return [undefined, new UpdateTodoDto(id, text, newComleted)];
+        return [undefined, new UpdateTodoDto(id, text, newCompletedAt)];
     }       
 }
