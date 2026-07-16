@@ -1,12 +1,12 @@
-import { envs } from '../config/envs.js';
-import { Server } from '../presentation/server.js';
+import { envs } from '../src/config/envs.js';
+import { Server } from '../src/presentation/server.js';
 
-jest.mock('../presentation/server.js')
+jest.mock('../src/presentation/server');
 
     describe('Should call server with arguments and start', ()=> {
 
         test('should work', async()=>{
-        await import('../app.js')            
+        await import('../src/app.js')            
             expect(Server).toHaveBeenCalledTimes(1);
             expect(Server).toHaveBeenCalledWith({
                 port: envs.PORT,

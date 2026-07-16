@@ -3,25 +3,25 @@ export class TodoEntiy{
     constructor(
         public id: number,
         public text: string,
-        public completeAt?: Date | null
+        public completedAt?: Date | null
 
     ){}
     get isCompleted(){
-        return !!this.completeAt;
+        return !!this.completedAt;
     }
     public static fromObject( object: {[key:string]:any} ): TodoEntiy{
-        const {id, text, completeAt } = object;
+        const {id, text, completedAt } = object;
         if( !id ) throw 'Id is required';
         if( !text ) throw 'Text is required';
 
         let newCompletedAt;
-        if ( completeAt ) {
-            newCompletedAt = new Date(completeAt);
+        if ( completedAt ) {
+            newCompletedAt = new Date(completedAt);
             if(isNaN( newCompletedAt.getTime() )){
                 throw 'CompleteAt is no valid date';
             }
         }
-      return new TodoEntiy(id, text, completeAt)
+      return new TodoEntiy(id, text, completedAt)
 
 
     }

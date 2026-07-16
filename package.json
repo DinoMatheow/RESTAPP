@@ -8,9 +8,11 @@
     "dev": "tsx watch src/app.ts",
     "build": "rimraf ./dist && tsc",
     "start": "pnpm build && node dist/app.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test": "pnpm run prisma:migrate:test && jest",
+    "test:watch": "pnpm run prisma:migrate:test && jest --watch ",
+    "test:coverage": "pnpm run prisma:migrate:test && jest --coverage",
+    "prisma:migrate:test": "dotenv -e .env.test -- pnpm prisma migrate deploy"
+    
   },
   "keywords": [],
   "author": "",
@@ -27,6 +29,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^25.9.0",
     "@types/supertest": "^7.2.1",
+    "dotenv-cli": "^11.0.0",
     "jest": "^30.4.2",
     "prisma": "^6.19.3",
     "rimraf": "^6.1.3",
