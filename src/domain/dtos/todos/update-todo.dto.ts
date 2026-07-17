@@ -12,7 +12,7 @@ export class UpdateTodoDto {
 
         if ( this.text ) returnObj.text = this.text;
         if ( this.completedAt ) returnObj.completedAt = this.completedAt;
-
+        
         return returnObj;
 
     }
@@ -26,7 +26,7 @@ export class UpdateTodoDto {
         }
 
         if ( completedAt ) {
-            const newCompletedAt = new Date( completedAt )
+            newCompletedAt = new Date( completedAt )
             if( newCompletedAt.toString() === 'Invalid Date' ) {
                 return ['CompletedAt must be a valid date', undefined]
             }

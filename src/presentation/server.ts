@@ -64,7 +64,7 @@ export class Server {
 
 
     }
-    public cloase(){
+    public close(){
         this.serverListener?.close();
     }
 
