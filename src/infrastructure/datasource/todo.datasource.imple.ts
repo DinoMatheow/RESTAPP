@@ -3,6 +3,7 @@ import type { TodoDatasource } from "../../domain/datasources/todo.datasource.js
 import { TodoEntiy } from "../../domain/dtos/entities/todo.entity.js";
 import type { CreateTodoDto } from "../../domain/dtos/todos/create-todo.dto.js";
 import type { UpdateTodoDto } from "../../domain/dtos/todos/update-todo.dto.js";
+import { CustomError } from "../../domain/errors/custom.error.js";
 
 export class TodoDatasourceImple implements TodoDatasource {
     async create(createTodoDto: CreateTodoDto): Promise<TodoEntiy> {
@@ -22,7 +23,7 @@ export class TodoDatasourceImple implements TodoDatasource {
           const todo = await prisma.todo.findFirst({
             where: {id}
         });
-        if(!todo) throw `Todo with id ${id} not found`;
+        if(!todo) throw new CustomError( `Todo with id ${id} not found`, 404);
 
         return TodoEntiy.fromObject(todo);
     }
